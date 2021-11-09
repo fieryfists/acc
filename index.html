@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Task</title>
+    <script>
+      // Task 2
+      class Provider {
+        /**
+         * Gets the weather for a given city
+         */
+        static getWeather(city) {
+          return Promise.resolve(`The weather of ${city} is Cloudy`);
+        }
+        /**
+         * Gets the weather for a given city
+         */
+        static getLocalCurrency(city) {
+          return Promise.resolve(`The local currency of ${city} is GBP`);
+        }
+        /**
+         * Given Longtitude and latitude, this function returns a city
+         */
+        static findCity(long, lat) {
+          return Promise.resolve(`London`);
+        }
+      }
+
+      async function printInfo() {
+        const geo = new Provider();
+        const city = await geo.constructor.findCity("51.5074", "0.1278");
+        const weather = await geo.constructor.getWeather(city);
+        const currency = await geo.constructor.getLocalCurrency(city);
+        console.log(city);
+        console.log(weather);
+        console.log(`${weather} - ${currency}`);
+      }
+
+      printInfo();
+
+      //tast3
+      /*
+
+      1.	Frontend part:
+        a.	Tools, frameworks, npm libraries you plan to use and why
+            react, react-bootstrap, nodejs, react-redux, jsonwebtoken, axios, jest
+
+        b.	Directory structure for source code folder
+        c.	List of components which you’ll implement (with short description)
+        d.	For one of the components also provide in which directory/-ies component’s file/-es will be located
+
+        All together could be in 2 ways (shown on Header container)
+            [components]
+                [Header] - Menu and meta
+                    Header.js
+                    index.js
+                    Header.css
+
+                LoginContainer.js - login actions view
+                MainContainer.js - main view container of app
+                ListContainer.js - all profilies list
+                SignupContainer.js - sign up actions view
+                UserProfile.js - current Profile view
+            [redux]
+                [action]
+                    passAction.js
+                    passType.js
+                    setAuthenticationToken.js
+                    userAction.js
+                    userType.js
+                [reducer]
+                    passReducer.js
+                    userReducer.js
+                index.js
+                store.js
+            [uploads]
+            App.css
+            App.js
+            App.test.js
+            index.css
+            index.js
+
+
+
+        e.	Benefits/drawbacks comparing with traditional (not-SPA) app approach
+        The same as using react or make the same as not-SPA application
+                    Real DOM	                    Virtual DOM
+            Updates are slow	                    Updates are fast
+            DOM manipulation is very expensive.	    DOM manipulation is very easy
+            You can update HTML directly.	        You Can’t directly update HTML
+            It causes too much of memory wastage	There is no memory wastage
+            Creates a new DOM if element updates	It updates the JSX if element update
+
+      2.	Backend part:
+        a.	Short description of API – URI, format, why needed
+        userSchema { for add users profiles
+            _id:{},
+            username: {},
+            email: {},
+            password: {},
+            profileImage:{},
+            date:{}
+        }
+
+        postSchema { - for add post for users
+            _id:{},
+            product_name: {},
+            text: {},
+            image:{},
+            date:{)
+        }
+
+        pass Schema { - for user login and registrations
+            password_category: {},
+            user_id:{},
+            date:{}
+        }
+
+        b.	Framework
+            nodejs, express, mongoose, jsonwebtoken
+
+        c.	Any other comments and suggestions
+      */
+
+      // Task 4
+      const errorCode = {
+        NO_STOCK: "No stock has been found",
+        INCORRECT_DETAILS: "Incorrect details have been entered",
+      };
+
+      /**
+       * Gets the processing page
+       * @param {array} data
+       */
+      function getProcessingPage(data) {
+        return processData(data);
+      }
+
+      /**
+       * @description Waitign process
+       * @return {void}
+       */
+      function proccessing() {
+        return new Promise(function (resolve, reject) {
+          window.setTimeout(function () {
+            resolve();
+          }, 2000);
+        });
+      }
+
+      /**
+       * @description Process queue
+       * @param {object} data
+       * @returns {string} message
+       */
+      async function processData(data) {
+        switch (data[0].state) {
+          case "processing":
+            await proccessing();
+            data.splice(0, 1);
+            return processData(data);
+
+          case "error":
+            return {
+              title: "Order error",
+              message: errorCode[data[0].errorCode] || null,
+            };
+
+          case "success":
+            return { title: "Order complete", message: null };
+        }
+      }
+
+      /* Example of a usage
+        async function example() {
+            const data = await getProcessingPage([{ state: 'processing' }, { state: 'error' }])
+        }
+        example();
+       */
+
+
+
+       //task5
+    </script>
+  </head>
+
+  <body></body>
+</html>
